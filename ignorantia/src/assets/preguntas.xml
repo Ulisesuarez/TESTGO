@@ -3,7 +3,7 @@
     <question id="que001">
       <text>¿Que muestra por consola el siguiente código?</text>
       <type>radio</type>
-      <image>img/pregunta1.png</image>
+      <image>../assets/pregunta1.png</image>
       <option correct="y">false</option>
       <option>true</option>
       <option>No compila</option>
@@ -16,7 +16,7 @@
     <question id="que002">
       <text>¿Qué recibe como argumentos y que devuelve la siguiente función?</text>
       <type>select multiple</type>
-      <image>img/pregunta2.png</image>
+      <image>../assets/pregunta2.png</image>
       <option>Recibe punteros de variables y devuelve direcciones de memoria.</option>
       <option>Recibe direcciones de memoria y devuelve punteros.</option>
       <option correct="y">No recibe ningún parámetro y devuelve direcciones de memoria.</option>
@@ -25,7 +25,7 @@
     <question id="que003">
       <text> ¿Que muestra por consola el siguiente código?</text>
       <type>text</type>
-      <image>img/pregunta3.png</image>
+      <image>../assets/pregunta3.png</image>
       <option correct="y">0</option>
       <option correct="y">1</option>
       <option correct="y">2</option>
@@ -36,7 +36,7 @@
     <question id="que004">
       <text>¿Que muestra por consola el siguiente código?</text>
       <type>select</type>
-      <image>img/pregunta4.png</image>
+      <image>../assets/pregunta4.png</image>
       <option>7</option>
       <option>4</option>
       <option>3</option>
@@ -66,7 +66,7 @@
     <question  id="que008">
       <text>¿Cuál es la secuencia del output generado por el siguiente código?</text>
       <type>select</type>
-      <image>img/pregunta8.png</image>
+      <image>../assets/pregunta8.png</image>
       <option>Siempre \n1\n2\n3</option>
       <option>Siempre \n2\n1\n3</option>
       <option>3</option>
