@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <questions>
+    <question id="que001">
+      <text>¿Que muestra por consola el siguiente código?</text>
+      <type>radio</type>
+      <image>img/pregunta1.png</image>
+      <option correct="y">false</option>
+      <option>true</option>
+      <option>No compila</option>
+      <type>checkbox</type>
+      <suboption>Porque  hay que escribir import para cada paquete importado</suboption>
+      <suboption>porque […]  es un error de sintaxis</suboption>
+      <suboption>porque no se puede declarar una variable sin la palabra reservada variable</suboption>
+      <suboption>todas las anteriores son correctas</suboption>
+    </question>
+    <question id="que002">
+      <text>¿Qué recibe como argumentos y que devuelve la siguiente función?</text>
+      <type>select multiple</type>
+      <image>img/pregunta2.png</image>
+      <option>Recibe punteros de variables y devuelve direcciones de memoria.</option>
+      <option>Recibe direcciones de memoria y devuelve punteros.</option>
+      <option correct="y">No recibe ningún parámetro y devuelve direcciones de memoria.</option>
+      <option correct="y">No recibe ningún parámetro y devuelve punteros. </option>
+    </question>
+    <question id="que003">
+      <text> ¿Que muestra por consola el siguiente código?</text>
+      <type>text</type>
+      <image>img/pregunta3.png</image>
+      <option correct="y">0</option>
+      <option correct="y">1</option>
+      <option correct="y">2</option>
+      <option correct="y">0</option>
+      <option correct="y">0</option>
+      <option correct="y">0</option>
+    </question>
+    <question id="que004">
+      <text>¿Que muestra por consola el siguiente código?</text>
+      <type>select</type>
+      <image>img/pregunta4.png</image>
+      <option>7</option>
+      <option>4</option>
+      <option>3</option>
+      <option correct="y">invalid operation: a + b (mismatched types int8 and int16)</option>
+    </question>
+    <question id="que005">
+      <text>Puede utilizarse la declaración abreviada  ":=" para definir variables globales?</text>
+      <type>button</type>
+      <option>Sí </option>
+      <option correct="y">No</option>
+    </question>
+    <question id="que006">
+      <text>¿Cual de las siguientes declaraciones es correcta?</text>
+      <type>radio</type>
+      <option>const Pi = math.Pi</option>
+      <option>const Pi = 3.1416</option>
+      <option correct="y">Ambas</option>
+      <option>Ninguna</option>
+    </question>
+    <question id="que007">
+      <type>button</type>
+      <text>Siendo que los Arrays son de type valor, ¿Al pasar un array a una función,
+        le pasamos una copia del Array o una referencia al Array?</text>
+      <option>Referencia</option>
+      <option correct="y">Copia </option>
+    </question>
+    <question  id="que008">
+      <text>¿Cuál es la secuencia del output generado por el siguiente código?</text>
+      <type>select</type>
+      <image>img/pregunta8.png</image>
+      <option>Siempre \n1\n2\n3</option>
+      <option>Siempre \n2\n1\n3</option>
+      <option>3</option>
+      <option correct="y">A veces \n1\n2\n3 y otras \n2\n1\n3 </option>
+    </question>
+    <question id="que009">
+      <text>¿Que especificador de formato  deberíamos emplear para imprimir un boolean?</text>
+      <type>datalist</type>
+      <option>%b</option>
+      <option correct="y">%t</option>
+      <option>%s</option>
+    </question>
+    <question id="que010">
+      <text>¿Cual es la salida del siguiente código?</text>
+      <type>select</type>
+      <option>0000</option>
+      <option>0123</option>
+      <option>0044</option>
+      <option correct="y">3210</option>
+      <option>4444</option>
+    </question>
+    <question id="que011">
+      <text>¿Te ha gustado este test?</text>
+      <type>checkbox</type>
+      <option correct="y">Sí</option>
+      <option correct="y">Mucho</option>
+      <option correct="y">Es lo mejor que me ha pasado nunca!</option>
+      <option correct="y">^^</option>
+    </question>
+
+  </questions>
+
