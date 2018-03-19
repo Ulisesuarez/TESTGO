@@ -17,7 +17,7 @@
       <v-flex xs12 sm12 md12>
         <v-card dark class="secondary">
           <v-card-text id="p1" class="px-0">{{pregunta1}}</v-card-text>
-          <img :src=src1 title="codigo1" alt="muerte">
+          <img id="img1" src="" title="codigo1" :alt="src1">
         </v-card>
       </v-flex>
       </v-layout>
@@ -56,7 +56,8 @@ export default {
       console.log(xmldoc.getElementsByTagName('question')[0].childNodes[1].innerHTML, 'queee')
 
       this.$data.pregunta1 = xmldoc.getElementsByTagName('question')[0].childNodes[1].innerHTML
-      this.$data.src1 = xmldoc.getElementsByTagName('question')[0].childNodes[5].innerHTML
+      this.$data.src1 = xmldoc.getElementsByTagName('question')[0].childNodes[5].innerHTML.toString()
+      document.getElementById('img1').src = xmldoc.getElementsByTagName('question')[0].childNodes[5].nodeValue
       console.log(this.$data.src1)
     }
   }
