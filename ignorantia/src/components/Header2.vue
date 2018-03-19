@@ -15,9 +15,9 @@
         </v-toolbar>
       </v-flex>
       <v-flex xs12 sm12 md12>
-        <v-card dark class="secondary">
+        <v-card id="contenedor" dark class="secondary">
           <v-card-text id="p1" class="px-0">{{pregunta1}}</v-card-text>
-          <img id="img1" src="" title="codigo1" :alt="src1">
+          <img id="img1" v-bind:src=src1 title="codigo1" :alt=src1>
         </v-card>
       </v-flex>
       </v-layout>
@@ -40,11 +40,11 @@ export default {
       let xhttp = new XMLHttpRequest()
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-          console.log(this)
+          // console.log(this)
           sel.gestionarXml(this.responseXML)
-          console.log('imin')
+          // console.log('imin')
         } else {
-          console.log('WTF', this.readyState, this.status)
+          // console.log('WTF', this.readyState, this.status)
         }
       }
       xhttp.open('GET', 'https://rawgit.com/Ulisesuarez/TESTGO/master/ignorantia/src/assets/preguntas.xml', true)
@@ -53,12 +53,31 @@ export default {
     },
 
     gestionarXml (xmldoc) {
-      console.log(xmldoc.getElementsByTagName('question')[0].childNodes[1].innerHTML, 'queee')
+      // console.log(xmldoc.getElementsByTagName('question')[0].childNodes[1].innerHTML, 'queee')
 
       this.$data.pregunta1 = xmldoc.getElementsByTagName('question')[0].childNodes[1].innerHTML
       this.$data.src1 = xmldoc.getElementsByTagName('question')[0].childNodes[5].innerHTML.toString()
-      document.getElementById('img1').src = xmldoc.getElementsByTagName('question')[0].childNodes[5].nodeValue
-      console.log(this.$data.src1)
+      // console.log(document.getElementById("contenedor"))
+      let formnode = document.createElement('FORM')
+      let tipo = xmldoc.getElementsByTagName('question')[0].childNodes[3].innerHTML
+      let flagRespuestas = xmldoc.getElementsByTagName('question')[0].childNodes[5]
+      console.log(flagRespuestas.nextSibling.nextSibling)
+      while (flagRespuestas.nextSibling.nextSibling.localName === 'option') {
+        flagRespuestas = flagRespuestas.nextSibling.nextSibling
+        let inputnode = document.createElement('INPUT')
+        console.log(tipo)
+        inputnode.setAttribute('type', tipo)
+        console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
+        if (flagRespuestas.attributes.correct.nodeValue === 'y') {
+          console.log('WTF')
+          inputnode.setAttribute('correct', 'y')
+        }
+        console.log(inputnode.type)
+        inputnode.innerText = flagRespuestas.childNodes.nodeValue
+        formnode.appendChild(inputnode)
+      }
+      console.log('HLAAAA')
+      console.log(formnode)
     }
   }
 }
