@@ -4,8 +4,8 @@
       <text>¿Que muestra por consola el siguiente código?</text>
       <type>radio</type>
       <image>https://i.imgur.com/LAtW5bD.png</image>
-      <option correct="y">false</option>
-      <option correct="n">true</option>
+      <option correct="y">False</option>
+      <option correct="n">True</option>
       <option correct="n">No compila</option>
       <type>checkbox</type>
       <suboption correct="n">Porque  hay que escribir import para cada paquete importado</suboption>
@@ -57,9 +57,9 @@
       <option correct="n">Ninguna</option>
     </question>
     <question id="que007">
-      <type>button</type>
       <text>Siendo que los Arrays son de type valor, ¿Al pasar un array a una función,
-        le pasamos una copia del Array o una referencia al Array?</text>
+      le pasamos una copia del Array o una referencia al Array?</text>
+      <type>button</type>
       <option correct="n">Referencia</option>
       <option correct="y">Copia </option>
     </question>
