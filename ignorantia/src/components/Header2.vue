@@ -260,6 +260,8 @@ export default {
     button (flagRespuestas) {
       document.getElementById('b0').style.display = 'inline-block'
       document.getElementById('b1').style.display = 'inline-block'
+      document.getElementById('b0').style.backgroundColor = '#212121'
+      document.getElementById('b1').style.backgroundColor = '#212121'
       this.respuestaButton.valor = ''
       let valorRespuesta = 0
       let arrayButtons = document.getElementsByClassName('answer')
