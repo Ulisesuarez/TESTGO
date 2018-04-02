@@ -65,20 +65,15 @@ export default {
       let xhttp = new XMLHttpRequest()
       xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-          // console.log(this)
           sel.gestionarXml(this.responseXML)
           sel.XMLparseado = this.responseXML
-          // console.log('imin')
         } else {
-          // console.log('WTF', this.readyState, this.status)
         }
       }
       xhttp.open('GET', 'https://rawgit.com/Ulisesuarez/TESTGO/master/ignorantia/src/assets/preguntas.xml', true)
       xhttp.send()
-      console.log('hola')
     },
     gestionarXml (xmldoc) {
-      console.log('COMENZANDO GESTIONAR')
       let flagRespuestas
       if (document.getElementById('formulario')) {
         let oldform = document.getElementById('formulario')
@@ -95,7 +90,6 @@ export default {
         flagRespuestas = xmldoc.getElementsByTagName('question')[this.indice].childNodes[3]
         this.$data.src1 = ''
       }
-      // console.log(document.getElementById("contenedor"))
       let formnode = document.createElement('FORM')
       formnode.style.textAlign = 'left'
       formnode.style.marginLeft = 10 + '%'
@@ -125,10 +119,7 @@ export default {
           this.radio(formnode, flagRespuestas)
           break
         default:
-          console.log('default')
       }
-
-      console.log(formnode)
       if (document.getElementById('boton')) {
         let submit = document.getElementById('boton')
         submit.innerHTML = 'Contestar'
@@ -140,7 +131,6 @@ export default {
       }
     },
     siguiente () {
-      console.log(this.indice)
       if (this.indice === 10) {
         this.tipoActual = ''
         this.mostrarCorreccion()
@@ -166,13 +156,10 @@ export default {
           break
 
         default:
-          console.log('default')
       }
       if (this.indice === 3) {
-        console.log('thats soem crazy chit')
         this.showButtons = true
       }
-      console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
     },
     mostrarCorreccion () {
       this.noFin = false
@@ -180,12 +167,9 @@ export default {
       for (let i = 0; i < 10; i++) {
         let container = document.getElementById('second')
         let clon = container.cloneNode(true)
-        console.log(clon)
         let textoPregunta = document.createElement('v-card-text')
-        console.log(textoPregunta)
         let imagenPregunta = document.createElement('IMG')
         let valorRespuesta = 0
-        console.log('COMENZANDO REGESTiON')
         let flagRespuestas
         textoPregunta.innerHTML = i + 1 + ') ' + this.XMLparseado.getElementsByTagName('question')[i].childNodes[1].innerHTML
         if (this.XMLparseado.getElementsByTagName('question')[i].childNodes[5].localName === 'image') {
@@ -198,7 +182,6 @@ export default {
           imagenPregunta.style.display = 'none'
           flagRespuestas = this.XMLparseado.getElementsByTagName('question')[i].childNodes[3]
         }
-        console.log(textoPregunta)
         clon.appendChild(textoPregunta)
         clon.appendChild(imagenPregunta)
         if (flagRespuestas.nextSibling.nextSibling != null) {
@@ -208,24 +191,19 @@ export default {
             let respuestas = document.createElement('P')
             respuestas.style.textAlign = 'left'
             respuestas.style.marginLeft = 10 + '%'
-            console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
             respuestas.setAttribute('value', i + 1 + '-' + valorRespuesta)
             respuestas.setAttribute('name', 'answer')
             if (flagRespuestas.attributes.correct.nodeValue === 'y') {
-              console.log('WTF')
               respuestas.setAttribute('correct', 'y')
               respuestas.style.backgroundColor = 'green'
             } else {
               respuestas.setAttribute('correct', 'n')
             }
             if (Array.isArray(this.ArrayRespuestas[i])) {
-              console.log(this.ArrayRespuestas[i])
               for (let subi = 0; subi < this.ArrayRespuestas[i].length; subi++) {
                 if (this.ArrayRespuestas[i][subi].valor === i + 1 + '-' + valorRespuesta) {
-                  console.log('y aqui')
                   respuestas.style.textDecoration = 'underline'
                   if (this.ArrayRespuestas[i][subi].correct === 'n') {
-                    console.log('rojo')
                     this.puntuacion = this.puntuacion - 1 / this.ArrayRespuestas[i].length
                     respuestas.style.backgroundColor = 'red'
                   }
@@ -258,33 +236,22 @@ export default {
                 }
               }
             } else {
-              console.log('entras')
-              console.log(flagRespuestas.childNodes[0].nodeValue.slice(0))
-              console.log(this.ArrayRespuestas[i].valor)
-              console.log(i + 1 + '-' + valorRespuesta)
-              console.log(this.ArrayRespuestas[i].valor === i + 1 + '-' + valorRespuesta)
               if (this.ArrayRespuestas[i].valor === i + 1 + '-' + valorRespuesta) {
-                console.log('y aqui')
                 respuestas.style.textDecoration = 'underline'
                 if (this.ArrayRespuestas[i].correct === 'n') {
-                  console.log('rojo')
                   respuestas.style.backgroundColor = 'red'
                   this.puntuacion = this.puntuacion - 1
                 }
               } else {
-                console.log(flagRespuestas.childNodes[0].nodeValue.slice(0))
                 if (this.ArrayRespuestas[i].identificador &&
                   this.ArrayRespuestas[i].identificador === i + 1 + '-' + valorRespuesta &&
                   this.ArrayRespuestas[i].valor !== this.ArrayRespuestas[i].correct) {
                   this.puntuacion = this.puntuacion - 1
                   wrong = document.createElement('P')
                   wrong.innerHTML = this.ArrayRespuestas[i].valor
-                  console.log(wrong.innerHTML)
-                  console.log(flagRespuestas.childNodes[0].nodeValue.slice(0))
                   if (wrong.innerHTML === flagRespuestas.childNodes[0].nodeValue.slice(0)) {
                     respuestas.style.display = 'none'
                   }
-                  console.log('wrong y flarespuestas')
                   wrong.style.backgroundColor = 'red'
                   wrong.style.marginLeft = 10 + '%'
                   wrong.style.textAlign = 'left'
@@ -302,17 +269,13 @@ export default {
             respuestas.innerHTML = flagRespuestas.childNodes[0].nodeValue
 
             clon.appendChild(respuestas)
-            console.log('espaciador :' + this.espaciar)
             if (this.espaciar) {
               clon.appendChild(document.createElement('P'))
-              console.log('Entra pero no se ve')
             }
-            console.log('FIN del while')
             valorRespuesta++
           }
         }
         document.getElementById('secondParent').appendChild(clon)
-        console.log(document.getElementById('secondParent'))
       }
       let Mensaje = document.createElement('H3')
       if (this.puntuacion === 10) {
@@ -326,33 +289,23 @@ export default {
     radio (formnode, flagRespuestas) {
       let valorRespuesta = 0
       if (flagRespuestas.nextSibling.nextSibling != null) {
-        console.log('entrado en el if')
         while (flagRespuestas.nextSibling.nextSibling && flagRespuestas.nextSibling.nextSibling.localName === 'option') {
-          console.log('principio del while')
-          console.log(flagRespuestas.nextSibling.nextSibling)
           flagRespuestas = flagRespuestas.nextSibling.nextSibling
           let inputnode = document.createElement('INPUT')
-          console.log(this.tipoActual)
           inputnode.setAttribute('type', this.tipoActual)
-          console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
           inputnode.setAttribute('value', this.indice + 1 + '-' + valorRespuesta)
           inputnode.setAttribute('name', 'answer')
           if (flagRespuestas.attributes.correct.nodeValue === 'y') {
-            console.log('WTF')
             inputnode.setAttribute('correct', 'y')
           } else {
             inputnode.setAttribute('correct', 'n')
           }
-          console.log(inputnode.type)
-          console.log('nodevalue of flagresppuestas')
-          console.log(flagRespuestas.childNodes[0].nodeValue)
           let text = document.createElement('SPAN')
           text.innerHTML = flagRespuestas.childNodes[0].nodeValue
           text.style.marginLeft = '2%'
           formnode.appendChild(inputnode)
           formnode.appendChild(text)
           formnode.appendChild(document.createElement('BR'))
-          console.log('FIN del while')
           valorRespuesta++
         }
       }
@@ -372,32 +325,21 @@ export default {
       selectNode.style.width = '80%'
       selectNode.style.whiteSpace = 'normal'
       if (flagRespuestas.nextSibling.nextSibling != null) {
-        console.log('entrado en el if')
         while (flagRespuestas.nextSibling.nextSibling && flagRespuestas.nextSibling.nextSibling.localName === 'option') {
-          console.log('principio del while')
-          console.log(flagRespuestas.nextSibling.nextSibling)
           flagRespuestas = flagRespuestas.nextSibling.nextSibling
           let inputnode = document.createElement('OPTION')
-          console.log(this.tipoActual)
-          console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
           inputnode.setAttribute('value', this.indice + 1 + '-' + valorRespuesta)
           inputnode.style.backgroundColor = '#68A6BF'
           if (flagRespuestas.attributes.correct.nodeValue === 'y') {
-            console.log('WTF')
-            console.log(formnode)
             inputnode.setAttribute('correct', 'y')
           } else {
             inputnode.setAttribute('correct', 'n')
           }
-          console.log(inputnode.type)
-          console.log('nodevalue of flagresppuestas')
-          console.log(flagRespuestas.childNodes[0].nodeValue)
           inputnode.setAttribute('title', flagRespuestas.childNodes[0].nodeValue)
           inputnode.innerHTML = flagRespuestas.childNodes[0].nodeValue
           inputnode.style.whiteSpace = 'normal'
           selectNode.appendChild(inputnode)
           valorRespuesta++
-          console.log('FIN del while')
         }
       }
       formnode.appendChild(selectNode)
@@ -405,13 +347,9 @@ export default {
     text (formnode, flagRespuestas) {
       let valorRespuesta = 0
       if (flagRespuestas.nextSibling.nextSibling != null) {
-        console.log('entrado en el if')
         while (flagRespuestas.nextSibling.nextSibling && flagRespuestas.nextSibling.nextSibling.localName === 'option') {
-          console.log('principio del while')
-          console.log(flagRespuestas.nextSibling.nextSibling)
           flagRespuestas = flagRespuestas.nextSibling.nextSibling
           let inputnode = document.createElement('INPUT')
-          console.log(this.tipoActual)
           inputnode.setAttribute('type', this.tipoActual)
           inputnode.style.marginLeft = '2%'
           inputnode.setAttribute('identificador', this.indice + 1 + '-' + valorRespuesta)
@@ -420,23 +358,17 @@ export default {
           } else {
             inputnode.style.backgroundColor = '#50bf90'
           }
-          console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
           inputnode.setAttribute('name', 'answer')
           if (flagRespuestas.attributes.correct.nodeValue === 'y') {
-            console.log('WTF')
             inputnode.setAttribute('correct', flagRespuestas.childNodes[0].nodeValue)
           } else {
             inputnode.setAttribute('correct', 'n')
           }
-          console.log(inputnode.type)
-          console.log('nodevalue of flagresppuestas')
-          console.log(flagRespuestas.childNodes[0].nodeValue)
           let label = document.createElement('SPAN')
           label.innerText = 'Num. ' + String.fromCharCode(97 + valorRespuesta) + ':'
           formnode.appendChild(label)
           formnode.appendChild(inputnode)
           formnode.appendChild(document.createElement('BR'))
-          console.log('FIN del while')
           valorRespuesta++
         }
       }
@@ -450,108 +382,73 @@ export default {
       let valorRespuesta = 0
       let arrayButtons = document.getElementsByClassName('resp')
       if (flagRespuestas.nextSibling.nextSibling != null) {
-        console.log('entrado en el if')
-        console.log(arrayButtons)
-        console.log(arrayButtons.length)
         for (let index = 0; index < 2; index++) {
-          console.log(index)
-          console.log('Aqui!')
-          console.log(arrayButtons[index])
-          console.log(arrayButtons[valorRespuesta])
-          console.log(flagRespuestas.nextSibling.nextSibling)
           flagRespuestas = flagRespuestas.nextSibling.nextSibling
-          console.log(this.tipoActual)
           arrayButtons[valorRespuesta].setAttribute('type', this.tipoActual)
           arrayButtons[valorRespuesta].setAttribute('name', 'resp')
           arrayButtons[valorRespuesta].setAttribute('valor', this.indice + 1 + '-' + valorRespuesta)
-          console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
-          console.log('hasta aqui llegas premoh')
           arrayButtons[valorRespuesta].innerHTML = flagRespuestas.childNodes[0].nodeValue
           if (flagRespuestas.attributes.correct.nodeValue === 'y') {
-            console.log('WTF')
             arrayButtons[valorRespuesta].setAttribute('correct', 'y')
           } else {
             arrayButtons[valorRespuesta].setAttribute('correct', 'n')
           }
-          console.log(arrayButtons[valorRespuesta])
           valorRespuesta++
         }
       }
     },
     setButtonAnswer (elboton) {
-      console.log(document.getElementById('b' + elboton))
-      console.log(document.getElementById('b' + elboton).attributes.valor.nodeValue)
-      console.log(document.getElementById('b' + elboton).attributes.correct.nodeValue)
       this.respuestaButton.valor = document.getElementById('b' + elboton).attributes.valor.nodeValue
       this.respuestaButton.correct = document.getElementById('b' + elboton).attributes.correct.nodeValue
       document.getElementById('b0').style.backgroundColor = '#212121'
       document.getElementById('b1').style.backgroundColor = '#212121'
       document.getElementById('b' + elboton).style.backgroundColor = '#68A6BF'
-
-      console.log(this.respuestaButton.valor)
     },
     dataList (formnode, flagRespuestas) {
       let sel = this
       let valorRespuesta = 0
       let inputnode = document.createElement('INPUT')
-      console.log(this.tipoActual)
       inputnode.setAttribute('list', 'answers')
       inputnode.id = 'InputDL'
       inputnode.setAttribute('name', 'answer')
       inputnode.oninput = function () {
         sel.respuestaDataLits.valor = document.getElementById('InputDL').value
-        console.log(sel.respuestaDataLits.valor)
       }
       inputnode.style.backgroundColor = '#68A6BF'
       let datalist = document.createElement('DATALIST')
       datalist.id = 'answers'
       if (flagRespuestas.nextSibling.nextSibling != null) {
-        console.log('entrado en el if')
         while (flagRespuestas.nextSibling.nextSibling && flagRespuestas.nextSibling.nextSibling.localName === 'option') {
-          console.log('principio del while')
-          console.log(flagRespuestas.nextSibling.nextSibling)
           let option = document.createElement('OPTION')
           flagRespuestas = flagRespuestas.nextSibling.nextSibling
-          console.log(flagRespuestas.attributes.correct.nodeValue === 'y')
           option.setAttribute('value', flagRespuestas.childNodes[0].nodeValue)
           option.setAttribute('class', 'datalist')
           option.setAttribute('identificador', this.indice + 1 + '-' + valorRespuesta)
           if (flagRespuestas.attributes.correct.nodeValue === 'y') {
-            console.log('WTF')
             let valorCorrecto = flagRespuestas.childNodes[0].nodeValue
             option.setAttribute('correct', valorCorrecto)
             this.respuestaDataLits.correct = valorCorrecto
           } else {
             option.setAttribute('correct', 'n')
           }
-          console.log(option)
-          console.log('nodevalue of flagresppuestas')
-          console.log(flagRespuestas.childNodes[0].nodeValue)
           datalist.appendChild(option)
-          console.log('FIN del while')
           valorRespuesta++
         }
       }
       inputnode.appendChild(datalist)
       formnode.appendChild(inputnode)
-      console.log(formnode)
     },
     checkRadio () {
       let radios = document.getElementsByName('answer')
       let respuesta = ''
       let RespCorreccion = {}
-      console.log(radios)
       for (let i = 0, length = radios.length; i < length; i++) {
         if (radios[i].checked) {
-          console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-          console.log(radios[i].attributes.correct.nodeValue)
           respuesta = radios[i].value
           RespCorreccion = {
             valor: respuesta,
             correct: radios[i].attributes.correct.nodeValue
           }
-          console.log(RespCorreccion.valor)
-          console.log(RespCorreccion.correct)
           break
         }
       }
@@ -560,14 +457,11 @@ export default {
       } else {
         this.ArrayRespuestas.push(RespCorreccion)
         this.indice++
-        console.log(this.indice)
-        console.log('porquenosepasa')
         this.gestionarXml(this.XMLparseado)
       }
     },
     checkSelectMultiple () {
       let select = document.getElementsByName('answer')
-      console.log(select)
       let respuestas = []
       let options = select[0]
       for (let i = 0, iLen = options.length; i < iLen; i++) {
@@ -586,15 +480,11 @@ export default {
         }
         this.ArrayRespuestas.push(respuestas)
         this.indice++
-        console.log(this.indice)
         this.gestionarXml(this.XMLparseado)
       }
-      console.log('biieen')
-      console.log(respuestas)
     },
     checkText () {
       let text = document.getElementsByName('answer')
-      console.log(text)
       let respondidoTodas = true
       let respuestas = []
       let options = text
@@ -614,9 +504,6 @@ export default {
       } else {
         this.ArrayRespuestas.push(respuestas)
         this.indice++
-        console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-        console.log(this.ArrayRespuestas[2][0].correct)
-        console.log(this.ArrayRespuestas[2][0].valor)
         this.gestionarXml(this.XMLparseado)
       }
     },
@@ -629,14 +516,9 @@ export default {
         this.indice++
         this.ArrayRespuestas.push(Object.assign({}, this.respuestaButton))
         this.gestionarXml(this.XMLparseado)
-        console.log(this.ArrayRespuestas.length)
       }
     },
     checkDataLits () {
-      console.log(this.respuestaDataLits)
-      console.log(this.respuestaDataLits.valor)
-      console.log(this.respuestaDataLits.correct)
-      console.log('whasaaaaaaaaa')
       if (this.respuestaDataLits.valor === '') {
         alert('Inventatelo!')
       } else {
