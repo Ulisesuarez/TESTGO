@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Header2 from '@/components/Header2'
+import Test from '@/components/Test'
 
 Vue.use(Router)
 
@@ -9,8 +9,8 @@ export default new Router({
 
     {
       path: '/',
-      name: 'header2',
-      component: Header2
+      name: 'test',
+      component: Test
     }
 
   ]
