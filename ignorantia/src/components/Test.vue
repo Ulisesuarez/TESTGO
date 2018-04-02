@@ -16,8 +16,8 @@
       </v-flex>
       <v-flex v-if="noFin" id="padre" xs12 sm12 md12>
         <v-card id="contenedor" dark class="secondary">
-          <v-card-text id="p1" class="px-0">{{pregunta1}}</v-card-text>
-          <img v-if="showImage" id="img1" v-bind:src=src1 title="codigo1" :alt=src1>
+          <v-card-text id="p1" class="px-0">{{pregunta}}</v-card-text>
+          <img v-if="showImage" id="img1" v-bind:src=src title="codigo1" :alt=src>
           <v-flex xs12 sm12 md12>
             <v-btn id="b0" @click="setButtonAnswer(0)" class="resp"></v-btn>
           <v-btn id="b1" @click="setButtonAnswer(1)" class="resp"></v-btn></v-flex>
@@ -36,14 +36,13 @@ export default {
   data: function () {
     return {
       name: 'test',
-      pregunta1: '',
-      src1: '',
+      pregunta: '',
+      src: '',
       ArrayRespuestas: [],
       indice: 0,
       XMLparseado: null,
       tipoActual: '',
       showImage: true,
-      showButtons: false,
       respuestaButton: {
         valor: '',
         correct: ''
@@ -79,16 +78,16 @@ export default {
         let oldform = document.getElementById('formulario')
         oldform.parentNode.removeChild(oldform)
       }
-      this.$data.pregunta1 = this.indice + 1 + ') ' + xmldoc.getElementsByTagName('question')[this.indice].childNodes[1].innerHTML
+      this.$data.pregunta = this.indice + 1 + ') ' + xmldoc.getElementsByTagName('question')[this.indice].childNodes[1].innerHTML
       if (xmldoc.getElementsByTagName('question')[this.indice].childNodes[5].localName === 'image') {
         this.showImage = true
         flagRespuestas = xmldoc.getElementsByTagName('question')[this.indice].childNodes[5]
-        this.$data.src1 = xmldoc.getElementsByTagName('question')[this.indice].childNodes[5].innerHTML.toString()
+        this.$data.src = xmldoc.getElementsByTagName('question')[this.indice].childNodes[5].innerHTML.toString()
         document.getElementById('img1').style.width = 80 + '%'
       } else {
         this.showImage = false
         flagRespuestas = xmldoc.getElementsByTagName('question')[this.indice].childNodes[3]
-        this.$data.src1 = ''
+        this.$data.src = ''
       }
       let formnode = document.createElement('FORM')
       formnode.style.textAlign = 'left'
@@ -156,9 +155,6 @@ export default {
           break
 
         default:
-      }
-      if (this.indice === 3) {
-        this.showButtons = true
       }
     },
     mostrarCorreccion () {
@@ -267,7 +263,6 @@ export default {
               }
             }
             respuestas.innerHTML = flagRespuestas.childNodes[0].nodeValue
-
             clon.appendChild(respuestas)
             if (this.espaciar) {
               clon.appendChild(document.createElement('P'))
